@@ -6,8 +6,8 @@ import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
-import { View, Text, Button } from 'react-native';
-import { useState } from 'react';
+import { View, Text, Button, Alert } from 'react-native';
+import { useState, useEffect } from 'react';
 
 // REMOVE "export default" here
 function WelcomeHeader() {
@@ -21,6 +21,16 @@ function WelcomeHeader() {
 export default function HomeScreen() {
 
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+      if (count === 10) {
+        Alert.alert("You have recieved 10 points.")
+      } else if (count === 20) {
+        Alert.alert("You have recieved 20 points.")
+      } else if (count === 30) {
+        Alert.alert("You have  recieved 30 points.")
+      }
+  }, [count]);
 
   return (
     <ParallaxScrollView
@@ -39,6 +49,10 @@ export default function HomeScreen() {
         <Button
           title="Tap to Count!"
           onPress={() => setCount(count + 1)}
+        />
+        <Button
+          title="Tap to Refresh!"
+          onPress={() => setCount(0)}
         />
       </ThemedView>
 
